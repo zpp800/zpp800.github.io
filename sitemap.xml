@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://zpp800.github.io/posts/abc.html</loc>
+    <loc>https://zpp800.github.io/tags/index.html</loc>
     
     <lastmod>2022-12-26</lastmod>
     
@@ -20,43 +20,7 @@
   </url>
   
   <url>
-    <loc>https://zpp800.github.io/posts/Test.html</loc>
-    
-    <lastmod>2022-12-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zpp800.github.io/posts/f007732d.html</loc>
-    
-    <lastmod>2022-12-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zpp800.github.io/posts/0.html</loc>
-    
-    <lastmod>2022-12-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zpp800.github.io/posts/4065cf0d.html</loc>
-    
-    <lastmod>2022-12-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zpp800.github.io/posts/d82dfa0e.html</loc>
+    <loc>https://zpp800.github.io/posts/2fbba4ed.html</loc>
     
     <lastmod>2022-12-26</lastmod>
     
@@ -127,6 +91,60 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://zpp800.github.io/categories/index.html</loc>
+    
+    <lastmod>2022-12-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zpp800.github.io/posts/abc.html</loc>
+    
+    <lastmod>2022-12-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zpp800.github.io/posts/Test.html</loc>
+    
+    <lastmod>2022-12-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zpp800.github.io/posts/f007732d.html</loc>
+    
+    <lastmod>2022-12-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zpp800.github.io/posts/0.html</loc>
+    
+    <lastmod>2022-12-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://zpp800.github.io/posts/4065cf0d.html</loc>
+    
+    <lastmod>2022-12-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   <url>
     <loc>https://zpp800.github.io/</loc>
@@ -137,7 +155,21 @@
 
   
   <url>
+    <loc>https://zpp800.github.io/tags/python/</loc>
+    <lastmod>2022-12-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://zpp800.github.io/tags/Test/</loc>
+    <lastmod>2022-12-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zpp800.github.io/tags/%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2022-12-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -150,6 +182,41 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://zpp800.github.io/tags/swagger2/</loc>
+    <lastmod>2022-12-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
+  
+  <url>
+    <loc>https://zpp800.github.io/categories/%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2022-12-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zpp800.github.io/categories/%E5%A8%B1%E4%B9%90/</loc>
+    <lastmod>2022-12-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zpp800.github.io/categories/%E5%A4%A7%E5%AD%A6/</loc>
+    <lastmod>2022-12-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zpp800.github.io/categories/%E7%90%90%E7%A2%8E/</loc>
+    <lastmod>2022-12-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 </urlset>
