@@ -1,0 +1,15 @@
+<svg width="143" height="22" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <g>
+  <title>background</title>
+  <rect fill="#ffffff" id="canvas_background" height="24" width="145" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <text font-style="italic" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Times New Roman', Times, serif" font-size="20" id="svg_1" y="16.999683" x="-2.500454" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#007fff">寒夕</text>
+  <text style="cursor: move;" font-style="italic" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Arvo, sans-serif" font-size="20" id="svg_3" y="19.999683" x="59.499546" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#56aaff">躺平中</text>
+  <rect rx="8" stroke="#000" opacity="0.2" id="svg_4" height="22.879516" width="141.999994" y="-0.000317" x="-0.50045" stroke-opacity="null" stroke-width="0" fill="#b5b5b5"/>
+  <path id="svg_6" d="m38.897053,6.3511l9.549229,0l2.950785,-9.54917l2.950787,9.54917l9.549227,0l-7.725474,5.901644l2.950938,9.54917l-7.725478,-5.901805l-7.725476,5.901805l2.950939,-9.54917l-7.725477,-5.901644z" stroke-width="0" stroke="#000" fill="#ff0cde"/>
+  <path id="svg_7" d="m138.918854,23.732047l0,0c-8.283535,0 -14.999999,-5.595453 -14.999999,-12.499991c0,-6.903653 6.716464,-12.499991 14.999999,-12.499991l0,0c-4.720791,2.950748 -7.499484,7.582078 -7.499484,12.499991s2.778693,9.548359 7.499484,12.499991z" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#cccc41"/>
+ </g>
+</svg>

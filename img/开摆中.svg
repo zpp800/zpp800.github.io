@@ -1,0 +1,15 @@
+<svg width="143" height="22" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <g>
+  <title>background</title>
+  <rect fill="#ffffff" id="canvas_background" height="24" width="145" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <text font-style="italic" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Times New Roman', Times, serif" font-size="20" id="svg_1" y="18.999686" x="-2.500454" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#007fff">寒夕</text>
+  <text font-style="italic" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Arvo, sans-serif" font-size="20" id="svg_3" y="17.999681" x="59.499546" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#56aaff">开摆中</text>
+  <rect rx="8" stroke="#000" opacity="0.2" id="svg_4" height="22.879516" width="141.999994" y="38.999735" x="4.499557" stroke-opacity="null" stroke-width="0" fill="#b5b5b5"/>
+  <path stroke="#000" id="svg_6" d="m38.897053,7.587168l9.549229,0l2.950785,-8.785235l2.950787,8.785235l9.549227,0l-7.725474,5.429512l2.950938,8.785235l-7.725478,-5.42966l-7.725476,5.42966l2.950939,-8.785235l-7.725477,-5.429512z" stroke-width="0" fill="#ff0cde"/>
+  <path stroke="#000" id="svg_8" d="m141.405122,11.164037l-4.035011,1.435398l0,-2.869266l4.035011,1.433869zm-2.929759,-7.070747l-1.838265,3.869l-2.028589,-2.03004l3.866854,-1.83896zm-7.070251,-2.928119l1.434688,4.035622l-2.87014,0l1.435452,-4.035622zm-7.071015,2.928119l3.868382,1.83896l-2.029353,2.03004l-1.839029,-3.869zm-2.928995,7.070747l4.035775,-1.433869l0,2.869266l-4.035775,-1.435398zm2.928995,7.070747l1.839029,-3.867471l2.029353,2.029276l-3.868382,1.838195l0,0zm7.071015,2.930412l-1.435452,-4.036387l2.87014,0l-1.434688,4.036387zm7.070251,-2.930412l-3.867618,-1.837431l2.028589,-2.029276l1.839029,3.866707zm-12.069873,-7.070747l0,0c0,-2.760733 2.238785,-4.999433 5.000387,-4.999433c2.760837,0 5.000387,2.2387 5.000387,4.999433c0,2.761497 -2.23955,5.000197 -5.000387,5.000197c-2.762366,0 -5.000387,-2.2387 -5.000387,-5.000197l0,0z" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#cccc41"/>
+ </g>
+</svg>
