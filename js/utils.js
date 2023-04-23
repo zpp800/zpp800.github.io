@@ -74,41 +74,6 @@ const anzhiyu = {
     });
   },
 
-  diffDate: (d, more = false) => {
-    const dateNow = new Date();
-    const datePost = new Date(d);
-    const dateDiff = dateNow.getTime() - datePost.getTime();
-    const minute = 1000 * 60;
-    const hour = minute * 60;
-    const day = hour * 24;
-    const month = day * 30;
-
-    let result;
-    if (more) {
-      const monthCount = dateDiff / month;
-      const dayCount = dateDiff / day;
-      const hourCount = dateDiff / hour;
-      const minuteCount = dateDiff / minute;
-
-      if (monthCount > 12) {
-        result = datePost.toLocaleDateString().replace(/\//g, "-");
-      } else if (monthCount >= 1) {
-        result = parseInt(monthCount) + " " + GLOBAL_CONFIG.date_suffix.month;
-      } else if (dayCount >= 1) {
-        result = parseInt(dayCount) + " " + GLOBAL_CONFIG.date_suffix.day;
-      } else if (hourCount >= 1) {
-        result = parseInt(hourCount) + " " + GLOBAL_CONFIG.date_suffix.hour;
-      } else if (minuteCount >= 1) {
-        result = parseInt(minuteCount) + " " + GLOBAL_CONFIG.date_suffix.min;
-      } else {
-        result = GLOBAL_CONFIG.date_suffix.just;
-      }
-    } else {
-      result = parseInt(dateDiff / day);
-    }
-    return result;
-  },
-
   loadComment: (dom, callback) => {
     if ("IntersectionObserver" in window) {
       const observerItem = new IntersectionObserver(
@@ -627,7 +592,7 @@ const anzhiyu = {
 
   //获取音乐中的名称
   musicGetName: function () {
-    var x = $(".aplayer-title");
+    var x = document.querySelector(".aplayer-title");
     var arr = [];
     for (var i = x.length - 1; i >= 0; i--) {
       arr[i] = x[i].innerText;
@@ -638,10 +603,12 @@ const anzhiyu = {
   // 检测显示模式
   darkModeStatus: function () {
     let theme = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
-    if (theme == "light") {
-      $(".menu-darkmode-text").text("深色模式");
+    const menuDarkmodeText = document.querySelector(".menu-darkmode-text");
+
+    if (theme === "light") {
+      menuDarkmodeText.textContent = "深色模式";
     } else {
-      $(".menu-darkmode-text").text("浅色模式");
+      menuDarkmodeText.textContent = "浅色模式";
     }
   },
 
@@ -1081,11 +1048,14 @@ const anzhiyu = {
   },
   //添加赞赏蒙版
   addRewardMask: function () {
+    if (!document.querySelector(".reward-main")) return;
     document.querySelector(".reward-main").style.display = "flex";
+    document.querySelector(".reward-main").style.zIndex = "102";
     document.getElementById("quit-box").style.display = "flex";
   },
   // 移除赞赏蒙版
   removeRewardMask: function () {
+    if (!document.querySelector(".reward-main")) return;
     document.querySelector(".reward-main").style.display = "none";
     document.getElementById("quit-box").style.display = "none";
   },
