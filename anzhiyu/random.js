@@ -1,1 +1,1 @@
-var posts=["2023/04/17/hello-world/","2023/04/25/Ubuntu22.04安装docker/","2023/05/07/文章创建模板/","2023/05/07/凡人赋/","2023/05/07/文章页面参数详解/","2023/05/07/凡人/"];function toRandomPost(){pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);};
+var posts=["2023/04/25/Ubuntu22.04安装docker/","2023/05/07/凡人赋/","2023/04/17/hello-world/","2023/05/07/凡人/","2023/05/07/文章创建模板/","2023/05/07/文章页面参数详解/"];function toRandomPost(){pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);};
