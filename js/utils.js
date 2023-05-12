@@ -278,7 +278,7 @@ const anzhiyu = {
       .replace('"', "")
       .replace('"', "");
     const currentTop = window.scrollY || document.documentElement.scrollTop;
-    if (currentTop > 56) {
+    if (currentTop > 16) {
       if (anzhiyu.is_Post()) {
         themeColor = getComputedStyle(document.documentElement)
           .getPropertyValue("--anzhiyu-meta-theme-post-color")
@@ -524,7 +524,7 @@ const anzhiyu = {
   },
   //友链随机传送
   travelling() {
-    var fetchUrl = "https://friends.anzhiy.cn/randomfriend";
+    var fetchUrl = GLOBAL_CONFIG.friends_vue_info.apiurl + "randomfriend";
     fetch(fetchUrl)
       .then(res => res.json())
       .then(json => {
@@ -537,8 +537,7 @@ const anzhiyu = {
           pos: "top-center",
           actionText: "前往",
           onActionClick: function (element) {
-            //Set opacity of element to 0 to close Snackbar
-            $(element).css("opacity", 0);
+            element.style.opacity = 0;
             window.open(link, "_blank");
           },
         });
@@ -627,6 +626,11 @@ const anzhiyu = {
     consoleEl.classList.add("reward-show");
     anzhiyu.initConsoleState();
   },
+  // 显示中控台
+  showConsole: function () {
+    document.querySelector("#console").classList.add("show");
+    anzhiyu.initConsoleState();
+  },
 
   //隐藏中控台
   hideConsole: function () {
@@ -637,6 +641,10 @@ const anzhiyu = {
       // 如果是打赏控制台，就关闭打赏控制台
       consoleEl.classList.remove("reward-show");
     }
+  },
+  // 取消加载动画
+  hideLoading: function () {
+    document.getElementById("loading-box").classList.add("loaded");
   },
   // 将音乐缓存播放
   cacheAndPlayMusic() {
@@ -740,7 +748,6 @@ const anzhiyu = {
     if (!window.location.pathname.startsWith("/music/")) {
       return;
     }
-    console.info(window.location.pathname);
     const urlParams = new URLSearchParams(window.location.search);
     const userId = "8152976493";
     const userServer = "netease";
@@ -758,6 +765,11 @@ const anzhiyu = {
   hideTodayCard: function () {
     if (document.getElementById("todayCard")) {
       document.getElementById("todayCard").classList.add("hide");
+      const topGroup = document.querySelector(".topGroup");
+      const recentPostItems = topGroup.querySelectorAll(".recent-post-item");
+      recentPostItems.forEach(item => {
+        item.style.display = "flex";
+      });
     }
   },
 
@@ -1058,5 +1070,80 @@ const anzhiyu = {
     if (!document.querySelector(".reward-main")) return;
     document.querySelector(".reward-main").style.display = "none";
     document.getElementById("quit-box").style.display = "none";
+  },
+
+  keyboardToggle: function () {
+    const isKeyboardOn = anzhiyu_keyboard;
+
+    if (isKeyboardOn) {
+      const consoleKeyboard = document.querySelector("#consoleKeyboard");
+      consoleKeyboard.classList.remove("on");
+      anzhiyu_keyboard = false;
+    } else {
+      const consoleKeyboard = document.querySelector("#consoleKeyboard");
+      consoleKeyboard.classList.add("on");
+      anzhiyu_keyboard = true;
+    }
+
+    localStorage.setItem("keyboardToggle", isKeyboardOn ? "false" : "true");
+  },
+  rightMenuToggle: function () {
+    if (window.oncontextmenu) {
+      window.oncontextmenu = null;
+    } else if (!window.oncontextmenu && oncontextmenuFunction) {
+      window.oncontextmenu = oncontextmenuFunction;
+    }
+  },
+  // 定义 intersectionObserver 函数，并接收两个可选参数
+  intersectionObserver: function (enterCallback, leaveCallback) {
+    let observer;
+    let isIntersected = false; // 增加一个状态变量，用于判断是否已经观察到过目标元素
+    return () => {
+      if (!observer) {
+        observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.intersectionRatio > 0 && !isIntersected) {
+              enterCallback?.();
+              isIntersected = true; // 设置状态变量为 true，表示已经观察到过目标元素
+            } else {
+              leaveCallback?.();
+            }
+          });
+        });
+      } else {
+        // 如果 observer 对象已经存在，则先取消对之前元素的观察
+        observer.disconnect();
+      }
+      return observer;
+    };
+  },
+  // CategoryBar滚动
+  scrollCategoryBarToRight: function () {
+    // 获取需要操作的元素
+    const items = document.getElementById("catalog-list");
+    const nextButton = document.getElementById("category-bar-next");
+
+    // 检查元素是否存在
+    if (items && nextButton) {
+      const itemsWidth = items.clientWidth;
+
+      // 判断是否已经滚动到最右侧
+      if (items.scrollLeft + items.clientWidth + 1 >= items.scrollWidth) {
+        // 滚动到初始位置并更新按钮内容
+        items.scroll({
+          left: 0,
+          behavior: "smooth",
+        });
+        nextButton.innerHTML = '<i class="anzhiyufont anzhiyu-icon-angle-double-right"></i>';
+      } else {
+        // 滚动到下一个视图
+        items.scrollBy({
+          left: itemsWidth,
+          behavior: "smooth",
+        });
+      }
+    } else {
+      console.error("Element(s) not found: 'catalog-list' and/or 'category-bar-next'.");
+    }
   },
 };

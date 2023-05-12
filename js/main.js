@@ -2,6 +2,8 @@
 var anzhiyu_musicFirst = false;
 // 音乐播放状态
 var anzhiyu_musicPlaying = false;
+// 是否开启快捷键
+var anzhiyu_keyboard = false;
 
 var adjectives = [
   "美丽的",
@@ -193,10 +195,15 @@ document.addEventListener("DOMContentLoaded", function () {
    * 首頁top_img底下的箭頭
    */
   const scrollDownInIndex = () => {
+    const $bbTimeList = document.getElementById("bbTimeList");
     const $scrollDownEle = document.getElementById("scroll-down");
     $scrollDownEle &&
       $scrollDownEle.addEventListener("click", function () {
-        anzhiyu.scrollToDest(document.getElementById("content-inner").offsetTop, 300);
+        if ($bbTimeList) {
+          anzhiyu.scrollToDest($bbTimeList.offsetTop, 300);
+        } else {
+          anzhiyu.scrollToDest(document.getElementById("content-inner").offsetTop, 300);
+        }
       });
   };
 
@@ -411,7 +418,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     const fetchUrl = async url => {
-      console.info(url);
       const response = await fetch(url);
       return await response.json();
     };
@@ -440,7 +446,6 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
           // 按钮懒加载
           lazyloadFn(item, arr, limit);
-          // document.querySelector(".gallery .gallery-load-more").style.display = "inline-block";
           const clickBtnFn = () => {
             const lastItemLength = lazyloadFn(item, arr, limit);
             fjGallery(
@@ -448,6 +453,7 @@ document.addEventListener("DOMContentLoaded", function () {
               "appendImages",
               item.querySelectorAll(`.fj-gallery-item:nth-last-child(-n+${lastItemLength})`)
             );
+            anzhiyu.loadLightbox(item.querySelectorAll("img"));
             lastItemLength < limit && item.nextElementSibling.removeEventListener("click", clickBtnFn);
           };
           item.nextElementSibling.addEventListener("click", clickBtnFn);
@@ -484,11 +490,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const scrollFn = function () {
     const $rightside = document.getElementById("rightside");
     const innerHeight = window.innerHeight + 56;
+    let lastScrollTop = 0;
 
     // 當滾動條小于 56 的時候
     if (document.body.scrollHeight <= innerHeight) {
       $rightside.style.cssText = "opacity: 1; transform: translateX(-58px)";
-      return;
     }
 
     // find the scroll direction
@@ -507,6 +513,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const scroolTask = anzhiyu.throttle(() => {
       const currentTop = window.scrollY || document.documentElement.scrollTop;
       const isDown = scrollDirection(currentTop);
+
+      const delta = Math.abs(lastScrollTop - currentTop);
+      if (currentTop > 56 && delta < 50 && delta != 0) {
+        // ignore small scrolls
+        return;
+      }
+      lastScrollTop = currentTop;
       if (currentTop > 16) {
         if (isDown) {
           if ($header.classList.contains("nav-visible")) $header.classList.remove("nav-visible");
@@ -521,13 +534,13 @@ document.addEventListener("DOMContentLoaded", function () {
             isChatShow = true;
           }
         }
-        $header.classList.add("nav-fixed");
         anzhiyu.initThemeColor();
+        $header.classList.add("nav-fixed");
         if (window.getComputedStyle($rightside).getPropertyValue("opacity") === "0") {
           $rightside.style.cssText = "opacity: 0.8; transform: translateX(-58px)";
         }
       } else {
-        if (currentTop === 0) {
+        if (currentTop <= 5) {
           if (!$header.querySelector(".bili-banner")) {
             $header.classList.remove("nav-fixed");
             $header.classList.remove("nav-visible");
@@ -563,20 +576,20 @@ document.addEventListener("DOMContentLoaded", function () {
       const $cardTocLayout = document.getElementById("card-toc");
       $cardToc = $cardTocLayout.getElementsByClassName("toc-content")[0];
       $tocLink = $cardToc.querySelectorAll(".toc-link");
-      const $tocPercentage = $cardTocLayout.querySelector(".toc-percentage");
+      // const $tocPercentage = $cardTocLayout.querySelector(".toc-percentage");
       isExpand = $cardToc.classList.contains("is-expand");
 
-      scrollPercent = currentTop => {
-        const docHeight = $article.clientHeight;
-        const winHeight = document.documentElement.clientHeight;
-        const headerHeight = $article.offsetTop;
-        const contentMath =
-          docHeight > winHeight ? docHeight - winHeight : document.documentElement.scrollHeight - winHeight;
-        const scrollPercent = (currentTop - headerHeight) / contentMath;
-        const scrollPercentRounded = Math.round(scrollPercent * 100);
-        const percentage = scrollPercentRounded > 100 ? 100 : scrollPercentRounded <= 0 ? 0 : scrollPercentRounded;
-        $tocPercentage.textContent = percentage;
-      };
+      // scrollPercent = currentTop => {
+      //   const docHeight = $article.clientHeight;
+      //   const winHeight = document.documentElement.clientHeight;
+      //   const headerHeight = $article.offsetTop;
+      //   const contentMath =
+      //     docHeight > winHeight ? docHeight - winHeight : document.documentElement.scrollHeight - winHeight;
+      //   const scrollPercent = (currentTop - headerHeight) / contentMath;
+      //   const scrollPercentRounded = Math.round(scrollPercent * 100);
+      //   const percentage = scrollPercentRounded > 100 ? 100 : scrollPercentRounded <= 0 ? 0 : scrollPercentRounded;
+      //   $tocPercentage.textContent = percentage;
+      // };
 
       window.mobileToc = {
         open: () => {
@@ -672,7 +685,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.tocScrollFn = function () {
       return anzhiyu.throttle(function () {
         const currentTop = window.scrollY || document.documentElement.scrollTop;
-        isToc && scrollPercent(currentTop);
+        // isToc && scrollPercent(currentTop);
         findHeadPosition(currentTop);
       }, 100)();
     };
@@ -752,6 +765,16 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         consoleEl.classList.add("show");
       }
+      const consoleKeyboard = document.querySelector("#consoleKeyboard");
+      if (consoleKeyboard) {
+        if (localStorage.getItem("keyboardToggle") === "true") {
+          consoleKeyboard.classList.add("on");
+          anzhiyu_keyboard = true;
+        } else {
+          consoleKeyboard.classList.remove("on");
+          anzhiyu_keyboard = false;
+        }
+      }
     },
 
     runMobileToc: () => {
@@ -796,7 +819,7 @@ document.addEventListener("DOMContentLoaded", function () {
     e => {
       anzhiyu.removeRewardMask();
     },
-    false
+    { passive: true }
   );
 
   /**
@@ -925,7 +948,6 @@ document.addEventListener("DOMContentLoaded", function () {
     backToTop: () => {
       document.querySelectorAll("#article-container .tabs .tab-to-top").forEach(function (item) {
         item.addEventListener("click", function () {
-          console.info(1);
           anzhiyu.scrollToDest(anzhiyu.getEleTop(anzhiyu.getParents(this, ".tabs")) - 60, 300);
         });
       });
@@ -1028,49 +1050,64 @@ document.addEventListener("DOMContentLoaded", function () {
     let body = document.querySelector("body");
     body.appendChild(div);
 
-    document.getElementById("post-comment").addEventListener("DOMNodeInserted", dom => {
-      if (dom.target.classList && dom.target.classList.value == "OwO-body") {
-        let owo_body = dom.target;
-
-        // 禁用右键（手机端长按会出现右键菜单，为了体验给禁用掉）
-        owo_body.addEventListener("contextmenu", e => e.preventDefault());
-
-        // 鼠标移入
-        owo_body.addEventListener("mouseover", e => {
-          if (e.target.tagName == "IMG" && flag) {
-            flag = 0;
-            // 移入300毫秒后显示盒子
-            owo_time = setTimeout(() => {
-              let height = e.target.clientHeight * m; // 盒子高
-              let width = e.target.clientWidth * m; // 盒子宽
-              let left = e.x - e.offsetX - (width - e.target.clientWidth) / 2; // 盒子与屏幕左边距离
-              if (left + width > body.clientWidth) {
-                left -= left + width - body.clientWidth + 10;
-              } // 右边缘检测，防止超出屏幕
-              if (left < 0) left = 10; // 左边缘检测，防止超出屏幕
-              let top = e.y - e.offsetY; // 盒子与屏幕顶部距离
-
-              // 设置盒子样式
-              div.style.height = height + "px";
-              div.style.width = width + "px";
-              div.style.left = left + "px";
-              div.style.top = top + "px";
-              div.style.display = "flex";
-              // 在盒子中插入图片
-              div.innerHTML = `<img src="${e.target.src}">`;
-            }, 300);
+    // 监听 post-comment 元素的子元素添加事件
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        const addedNodes = mutation.addedNodes;
+        // 判断新增的节点中是否包含 OwO-body 类名的元素
+        for (let i = 0; i < addedNodes.length; i++) {
+          const node = addedNodes[i];
+          if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains("OwO-body")) {
+            const owo_body = node;
+            // 禁用右键（手机端长按会出现右键菜单，为了体验给禁用掉）
+            owo_body.addEventListener("contextmenu", e => e.preventDefault());
+            // 鼠标移入
+            owo_body.addEventListener("mouseover", handleMouseOver);
+            // 鼠标移出
+            owo_body.addEventListener("mouseout", handleMouseOut);
           }
-        });
-
-        // 鼠标移出
-        owo_body.addEventListener("mouseout", e => {
-          // 隐藏盒子
-          div.style.display = "none";
-          flag = 1;
-          clearTimeout(owo_time);
-        });
-      }
+        }
+      });
     });
+
+    // 配置 MutationObserver 选项
+    const config = { childList: true, subtree: true };
+
+    // 开始监听
+    observer.observe(document.getElementById("post-comment"), config);
+
+    function handleMouseOver(e) {
+      if (e.target.tagName == "IMG" && flag) {
+        flag = 0;
+        // 移入100毫秒后显示盒子
+        owo_time = setTimeout(() => {
+          let height = e.target.clientHeight * m; // 盒子高
+          let width = e.target.clientWidth * m; // 盒子宽
+          let left = e.x - e.offsetX - (width - e.target.clientWidth) / 2; // 盒子与屏幕左边距离
+          if (left + width > body.clientWidth) {
+            left -= left + width - body.clientWidth + 10;
+          } // 右边缘检测，防止超出屏幕
+          if (left < 0) left = 10; // 左边缘检测，防止超出屏幕
+          let top = e.y - e.offsetY; // 盒子与屏幕顶部距离
+
+          // 设置盒子样式
+          div.style.height = height + "px";
+          div.style.width = width + "px";
+          div.style.left = left + "px";
+          div.style.top = top + "px";
+          div.style.display = "flex";
+          // 在盒子中插入图片
+          div.innerHTML = `<img src="${e.target.src}">`;
+        }, 100);
+      }
+    }
+
+    function handleMouseOut(e) {
+      // 隐藏盒子
+      div.style.display = "none";
+      flag = 1;
+      clearTimeout(owo_time);
+    }
   };
 
   // 网页百分比
@@ -1106,7 +1143,7 @@ document.addEventListener("DOMContentLoaded", function () {
           ) - document.documentElement.clientHeight, // 整个网页高度 减去 可视高度
         result = Math.round((scrollTop / scrollHeight) * 100); // 计算百分比
 
-      result = Math.min(99, Math.max(0, result));
+      result = Math.min(99, Math.max(1, result));
 
       // 滚动到底部区域需要做的操作
       if (anzhiyu.isInViewPortOfOne(pageBottomDomFlag) || 90 < result) {
@@ -1159,7 +1196,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const root = document.querySelector(":root");
     if (path !== undefined) {
       var httpRequest = new XMLHttpRequest(); //第一步：建立所需的对象
-      httpRequest.open("GET", path + "?imageAve", true); //第二步：打开连接  将请求参数写在url中  ps:"./Ptest.php?name=test&nameone=testone"
+      httpRequest.open("GET", path + "?imageAve", true); //第二步：打开连接  将请求参数写在url中
       httpRequest.send(); //第三步：发送请求  将请求参数写在URL中
       /**
        * 获取数据后的处理程序
