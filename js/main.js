@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const sidebarFn = {
     open: () => {
       anzhiyu.sidebarPaddingR();
-      anzhiyu.changeThemeColor("#607d8b");
+      anzhiyu.changeThemeMetaColor("#607d8b");
       anzhiyu.animateIn(document.getElementById("menu-mask"), "to_show 0.5s");
       $sidebarMenus.classList.add("open");
       $web_box.classList.add("open");
@@ -288,8 +288,8 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   /**
-   * 代碼
-   * 只適用於Hexo默認的代碼渲染
+   * 代码
+   * 只适用于Hexo默认的代码渲染
    */
   const addHighlightTool = function () {
     const highLight = GLOBAL_CONFIG.highlight;
@@ -420,7 +420,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         $figureHighlight.forEach(function (item) {
           let langName = item.getAttribute("class").split(" ")[1];
-          if (langName === "plain" || langName === undefined) langName = "Code";
+          if (langName === "plain" || langName === undefined || langName === "plaintext") langName = "Code";
           const highlightLangEle = `<div class="code-lang">${langName}</div>`;
           createEle(highlightLangEle, item, "hl");
         });
@@ -473,13 +473,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const alt = i.alt ? `alt="${replaceDq(i.alt)}"` : "";
         const title = i.title ? `title="${replaceDq(i.title)}"` : "";
         const address = i.address ? i.address : "";
-        if (address) {
-          str += `<div class="fj-gallery-item"><div class="tag-address">${address}</div><img src="${i.url}" ${
-            alt + title
-          }"></div>`;
-        } else {
-          str += `<div class="fj-gallery-item"><img src="${i.url}" ${alt + title}"></div>`;
-        }
+        const galleryItem = `
+        <div class="fj-gallery-item">
+          ${address ? `<div class="tag-address">${address}</div>` : ""}
+          <img src="${i.url}" ${alt + title}>
+        </div>
+      `;
+        str += galleryItem;
       });
 
       return str;
@@ -493,7 +493,7 @@ document.addEventListener("DOMContentLoaded", function () {
         i.insertAdjacentHTML("beforeend", htmlStr(arr));
         i.classList.remove("lazyload");
       }
-      window.lazyLoadInstance.update();
+      window.lazyLoadInstance && window.lazyLoadInstance.update();
       return arrLength > loadItem ? loadItem : arrLength;
     };
 
@@ -507,8 +507,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!item.classList.contains("lazyload") || arr.length < limit) {
         // 不懒加载
         item.innerHTML = htmlStr(arr);
+        item.nextElementSibling.style.display = "none"
       } else {
-        if (!item.classList.contains("btn_album_detail_lazyload")) {
+        if (!item.classList.contains("btn_album_detail_lazyload") || item.classList.contains("page_img_lazyload")) {
           // 滚动懒加载
           lazyloadFn(item, arr, limit);
           const clickBtnFn = () => {
@@ -519,12 +520,24 @@ document.addEventListener("DOMContentLoaded", function () {
               item.querySelectorAll(`.fj-gallery-item:nth-last-child(-n+${lastItemLength})`)
             );
             anzhiyu.loadLightbox(item.querySelectorAll("img"));
-            lastItemLength < Number(limit) && (window.runJustifiedGalleryNextElementSiblingLazyloadFn = null);
+            if (lastItemLength < Number(limit)) {
+              observer.unobserve(item.nextElementSibling);
+            }
           };
 
-          window.runJustifiedGalleryNextElementSiblingLazyloadFn = clickBtnFn;
+          // 创建IntersectionObserver实例
+          const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+              // 如果元素进入视口
+              if (entry.isIntersecting) {
+                // 执行clickBtnFn函数
+                setTimeout(clickBtnFn(), 100);
+              }
+            });
+          });
+          observer.observe(item.nextElementSibling);
         } else {
-          // 按钮懒加载
+          // 相册详情 按钮懒加载
           lazyloadFn(item, arr, limit);
           const clickBtnFn = () => {
             const lastItemLength = lazyloadFn(item, arr, limit);
@@ -542,7 +555,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       anzhiyu.initJustifiedGallery(item);
       anzhiyu.loadLightbox(item.querySelectorAll("img"));
-      window.lazyLoadInstance.update();
+      window.lazyLoadInstance && window.lazyLoadInstance.update();
     };
 
     const addJustifiedGallery = () => {
@@ -648,19 +661,6 @@ document.addEventListener("DOMContentLoaded", function () {
           }, 500);
         }
       }
-
-      function runLazyLoad() {
-        const runFn = window.runJustifiedGalleryNextElementSiblingLazyloadFn;
-        if (runFn) {
-          runFn();
-        }
-      }
-
-      // 如果当前为相册详情页
-      const albumDetailGalleryLoadMore = document.getElementById("album_detail_gallery_load_more");
-      if (albumDetailGalleryLoadMore && anzhiyu.isInViewPortOfOne(albumDetailGalleryLoadMore)) {
-        setTimeout(runLazyLoad, 100);
-      }
     }
 
     const scroolTask = anzhiyu.throttle(() => {
@@ -709,29 +709,30 @@ document.addEventListener("DOMContentLoaded", function () {
       if (document.body.scrollHeight <= innerHeight) {
         $rightside.style.cssText = "opacity: 0.8; transform: translateX(-58px)";
       }
-
+      
       percentageScrollFn(currentTop);
     }, 96);
 
     // 进入footer隐藏音乐
-    anzhiyu
-      .intersectionObserver(
-        () => {
-          // console.log(1);
-          if (footerDom && musicDom && 768 < document.body.clientWidth) {
-            musicDom.style.bottom = "-10px";
-            musicDom.style.opacity = "0";
+    if (footerDom) {
+      anzhiyu
+        .intersectionObserver(
+          () => {
+            if (footerDom && musicDom && 768 < document.body.clientWidth) {
+              musicDom.style.bottom = "-10px";
+              musicDom.style.opacity = "0";
+            }
+            scrollBottomFirstFlag = true;
+          },
+          () => {
+            if (footerDom && musicDom && 768 < document.body.clientWidth) {
+              musicDom.style.bottom = "20px";
+              musicDom.style.opacity = "1";
+            }
           }
-          scrollBottomFirstFlag = true;
-        },
-        () => {
-          if (footerDom && musicDom && 768 < document.body.clientWidth) {
-            musicDom.style.bottom = "20px";
-            musicDom.style.opacity = "1";
-          }
-        }
-      )()
-      .observe(footerDom);
+        )()
+        .observe(footerDom);
+    }
 
     window.scrollCollect = scroolTask;
     window.addEventListener("scroll", scrollCollect);
@@ -898,30 +899,6 @@ document.addEventListener("DOMContentLoaded", function () {
         : saveToLocal.set("aside-status", "hide", 2);
       $htmlDom.toggle("hide-aside");
     },
-    switchConsole: () => {
-      // switch console
-      const consoleEl = document.getElementById("console");
-      //初始化隐藏边栏
-      const $htmlDom = document.documentElement.classList;
-      $htmlDom.contains("hide-aside")
-        ? document.querySelector("#consoleHideAside").classList.add("on")
-        : document.querySelector("#consoleHideAside").classList.remove("on");
-      if (consoleEl.classList.contains("show")) {
-        consoleEl.classList.remove("show");
-      } else {
-        consoleEl.classList.add("show");
-      }
-      const consoleKeyboard = document.querySelector("#consoleKeyboard");
-      if (consoleKeyboard) {
-        if (localStorage.getItem("keyboardToggle") === "true") {
-          consoleKeyboard.classList.add("on");
-          anzhiyu_keyboard = true;
-        } else {
-          consoleKeyboard.classList.remove("on");
-          anzhiyu_keyboard = false;
-        }
-      }
-    },
 
     runMobileToc: () => {
       if (window.getComputedStyle(document.getElementById("card-toc")).getPropertyValue("opacity") === "0")
@@ -950,9 +927,6 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
       case "hide-aside-btn":
         rightSideFn.hideAsideBtn();
-        break;
-      case "center-console":
-        rightSideFn.switchConsole();
         break;
       default:
         break;
@@ -1268,9 +1242,22 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!path) {
       root.style.setProperty("--anzhiyu-bar-background", "var(--anzhiyu-meta-theme-color)");
       anzhiyu.initThemeColor();
+
+      if (GLOBAL_CONFIG.changeMainColorPost) {
+        document.documentElement.style.setProperty(
+          "--anzhiyu-main",
+          getComputedStyle(document.documentElement).getPropertyValue("--anzhiyu-theme")
+        );
+      }
+
       return;
     }
 
+    if (!GLOBAL_CONFIG.changeMainColorPost) {
+      root.style.setProperty("--anzhiyu-bar-background", "var(--anzhiyu-theme)");
+      anzhiyu.initThemeColor();
+      return
+    }
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", `${path}?imageAve`, true);
     httpRequest.send();
@@ -1290,15 +1277,18 @@ document.addEventListener("DOMContentLoaded", function () {
             value = LightenDarkenColor(colorHex(value), -40);
           }
         } catch (err) {
-          value = "var(--anzhiyu-main)";
+          value = "var(--anzhiyu-theme)";
         }
       } else if (isRequestCompleted) {
-        value = "var(--anzhiyu-main)";
+        value = "var(--anzhiyu-theme)";
       }
 
       if (value) {
         root.style.setProperty("--anzhiyu-bar-background", value);
         anzhiyu.initThemeColor();
+        if (GLOBAL_CONFIG.changeMainColorPost) {
+          document.documentElement.style.setProperty("--anzhiyu-main", value);
+        }
       }
     };
   };
@@ -1406,14 +1396,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const timer = setInterval(() => {
       if (navMusicEl.querySelector("#nav-music meting-js").aplayer) {
         clearInterval(timer);
+        let msgPlay = '<i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span>';
+        let msgPause = '<i class="anzhiyufont anzhiyu-icon-pause"></i><span>暂停音乐</span>';
         navMusicEl.querySelector("#nav-music meting-js").aplayer.on("pause", function () {
           navMusicEl.classList.remove("playing");
-          document.getElementById("menu-music-toggle").innerHTML =
-            '<i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span>';
+          document.getElementById("menu-music-toggle").innerHTML = msgPlay;
           document.getElementById("nav-music-hoverTips").innerHTML = "音乐已暂停";
           document.querySelector("#consoleMusic").classList.remove("on");
           anzhiyu_musicPlaying = false;
           navMusicEl.classList.remove("stretch");
+        });
+        navMusicEl.querySelector("#nav-music meting-js").aplayer.on("play", function () {
+          navMusicEl.classList.add("playing");
+          document.getElementById("menu-music-toggle").innerHTML = msgPause;
+          document.querySelector("#consoleMusic").classList.add("on");
+          anzhiyu_musicPlaying = true;
+          // navMusicEl.classList.add("stretch");
         });
       }
     }, 16);
@@ -1429,6 +1427,9 @@ document.addEventListener("DOMContentLoaded", function () {
       adjustMenu(false);
       anzhiyu.isHidden(document.getElementById("toggle-menu")) && mobileSidebarOpen && sidebarFn.close();
     });
+
+
+    anzhiyu.darkModeStatus();
 
     document.getElementById("menu-mask").addEventListener("click", e => {
       sidebarFn.close();
@@ -1457,6 +1458,9 @@ document.addEventListener("DOMContentLoaded", function () {
     addHighlightTool();
     GLOBAL_CONFIG.isPhotoFigcaption && addPhotoFigcaption();
     scrollFn();
+
+    // 刷新时第一次滚动百分比
+    window.scrollCollect && window.scrollCollect();
 
     const $jgEle = document.querySelectorAll("#content-inner .fj-gallery");
     $jgEle.length && runJustifiedGallery($jgEle);

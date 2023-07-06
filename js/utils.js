@@ -262,7 +262,7 @@ const anzhiyu = {
   },
 
   //更改主题色
-  changeThemeColor: function (color) {
+  changeThemeMetaColor: function (color) {
     // console.info(`%c ${color}`, `font-size:36px;color:${color};`);
     if (themeColorMeta !== null) {
       themeColorMeta.setAttribute("content", color);
@@ -286,10 +286,10 @@ const anzhiyu = {
           .replace('"', "");
       }
       if (themeColorMeta.getAttribute("content") === themeColor) return;
-      this.changeThemeColor(themeColor);
+      this.changeThemeMetaColor(themeColor);
     } else {
       if (themeColorMeta.getAttribute("content") === themeColor) return;
-      this.changeThemeColor(themeColor);
+      this.changeThemeMetaColor(themeColor);
     }
   },
   switchDarkMode: () => {
@@ -402,14 +402,14 @@ const anzhiyu = {
   switchCommentBarrage: function () {
     let commentBarrage = document.querySelector(".comment-barrage");
     if (commentBarrage) {
-      if (window.getComputedStyle(commentBarrage).display === "block") {
+      if (window.getComputedStyle(commentBarrage).display === "flex") {
         commentBarrage.style.display = "none";
         anzhiyu.snackbarShow("✨ 已关闭评论弹幕");
         document.querySelector(".menu-commentBarrage-text").textContent = "显示热评";
         document.querySelector("#consoleCommentBarrage").classList.remove("on");
         localStorage.setItem("commentBarrageSwitch", "false");
       } else {
-        commentBarrage.style.display = "block";
+        commentBarrage.style.display = "flex";
         document.querySelector(".menu-commentBarrage-text").textContent = "关闭热评";
         document.querySelector("#consoleCommentBarrage").classList.add("on");
         anzhiyu.snackbarShow("✨ 已开启评论弹幕");
@@ -591,8 +591,8 @@ const anzhiyu = {
       anzhiyu.musicBindEvent();
       anzhiyu_musicFirst = true;
     }
-    let msgPlay = '<i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span>'; // 此處可以更改為你想要顯示的文字
-    let msgPause = '<i class="anzhiyufont anzhiyu-icon-pause"></i><span>暂停音乐</span>'; // 同上，但兩處均不建議更改
+    let msgPlay = '<i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span>';
+    let msgPause = '<i class="anzhiyufont anzhiyu-icon-pause"></i><span>暂停音乐</span>';
     if (anzhiyu_musicPlaying) {
       navMusicEl.classList.remove("playing");
       document.getElementById("menu-music-toggle").innerHTML = msgPlay;
@@ -682,6 +682,14 @@ const anzhiyu = {
     } else if (consoleEl.classList.contains("reward-show")) {
       // 如果是打赏控制台，就关闭打赏控制台
       consoleEl.classList.remove("reward-show");
+    }
+    // 获取center-console元素
+    const centerConsole = document.getElementById('center-console');
+
+    // 检查center-console是否被选中
+    if (centerConsole.checked) {
+      // 取消选中状态
+      centerConsole.checked = false;
     }
   },
   // 取消加载动画
@@ -1143,6 +1151,30 @@ const anzhiyu = {
       window.oncontextmenu = oncontextmenuFunction;
     }
   },
+  switchConsole: () => {
+    // switch console
+    const consoleEl = document.getElementById("console");
+    //初始化隐藏边栏
+    const $htmlDom = document.documentElement.classList;
+    $htmlDom.contains("hide-aside")
+      ? document.querySelector("#consoleHideAside").classList.add("on")
+      : document.querySelector("#consoleHideAside").classList.remove("on");
+    if (consoleEl.classList.contains("show")) {
+      consoleEl.classList.remove("show");
+    } else {
+      consoleEl.classList.add("show");
+    }
+    const consoleKeyboard = document.querySelector("#consoleKeyboard");
+    if (consoleKeyboard) {
+      if (localStorage.getItem("keyboardToggle") === "true") {
+        consoleKeyboard.classList.add("on");
+        anzhiyu_keyboard = true;
+      } else {
+        consoleKeyboard.classList.remove("on");
+        anzhiyu_keyboard = false;
+      }
+    }
+  },
   // 定义 intersectionObserver 函数，并接收两个可选参数
   intersectionObserver: function (enterCallback, leaveCallback) {
     let observer;
@@ -1219,5 +1251,15 @@ const anzhiyu = {
       this.scrollLeft += v;
       e.preventDefault();
     });
+  },
+  // 切换菜单显示热评
+  switchRightClickMenuHotReview: function () {
+    const postComment = document.getElementById("post-comment");
+    const menuCommentBarrageDom = document.getElementById("menu-commentBarrage");
+    if (postComment) {
+      menuCommentBarrageDom.style.display = "flex";
+    } else {
+      menuCommentBarrageDom.style.display = "none";
+    }
   },
 };
