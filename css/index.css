@@ -1854,7 +1854,7 @@ i.anzhiyu-icon-hashtag {
   --anzhiyu-meta-theme-post-color: #fff;
   --anzhiyu-meta-theme-color: #f7f9fe;
   --anzhiyu-theme-op-deep: rgba(66,89,239,0.867);
-  --global-bg: #f7f9fe;
+  --global-bg: url("https://qny.hanxi.fun/img/indexbg.jpg");
   --anzhiyu-theme: #3b70fc;
   --anzhiyu-theme-deep: #1856fb;
   --anzhiyu-theme-op: rgba(66,89,239,0.137);
@@ -1864,7 +1864,7 @@ i.anzhiyu-icon-hashtag {
   --anzhiyu-pink: #ff7c7c;
   --anzhiyu-green: #57bd6a;
   --anzhiyu-fontcolor: #363636;
-  --anzhiyu-background: #f7f9fe;
+  --anzhiyu-background: url("https://qny.hanxi.fun/img/indexbg.jpg");
   --anzhiyu-reverse: #000;
   --anzhiyu-maskbg: rgba(255,255,255,0.6);
   --anzhiyu-maskbgdeep: rgba(255,255,255,0.85);
@@ -5678,6 +5678,12 @@ body[data-type="link"] #page .page-title {
   display: none;
   color: var(--anzhiyu-secondtext);
   font-size: 0.5rem;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
   position: fixed;
   left: 40px;
   top: 205px;
