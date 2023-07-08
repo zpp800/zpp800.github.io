@@ -1,0 +1,287 @@
+.tag-cloud-list.is-center {
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    gap: 12px;
+    padding: 0;
+    -webkit-box-lines: multiple;
+    -moz-box-lines: multiple;
+    -o-box-lines: multiple;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+
+.tag-cloud-list a {
+    display: inline-block;
+    padding: 0 8px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    transition: all 0.3s;
+    cursor: pointer;
+    /* width: calc(100% / 3 - 8px); */
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    border: var(--leonus-border);
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -o-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -o-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border-radius: 100px;
+}
+
+.tag-cloud-list.is-center a:nth-child(1) {
+	background:-webkit-linear-gradient(left,#fbd786,#f7797d);
+	background:-moz-linear-gradient(left,#fbd786,#f7797d);
+	background:-o-linear-gradient(left,#fbd786,#f7797d);
+	background:-ms-linear-gradient(left,#fbd786,#f7797d);
+	background:linear-gradient(to right,#fbd786,#f7797d)
+}
+.tag-cloud-list.is-center a:nth-child(2) {
+	background:-webkit-linear-gradient(left,#00b09b,#96c93d);
+	background:-moz-linear-gradient(left,#00b09b,#96c93d);
+	background:-o-linear-gradient(left,#00b09b,#96c93d);
+	background:-ms-linear-gradient(left,#00b09b,#96c93d);
+	background:linear-gradient(to right,#00b09b,#96c93d)
+}
+.tag-cloud-list.is-center a:nth-child(3) {
+	background:-webkit-linear-gradient(left,#ff6e7f,#bfe9ff);
+	background:-moz-linear-gradient(left,#ff6e7f,#bfe9ff);
+	background:-o-linear-gradient(left,#ff6e7f,#bfe9ff);
+	background:-ms-linear-gradient(left,#ff6e7f,#bfe9ff);
+	background:linear-gradient(to right,#ff6e7f,#bfe9ff)
+}
+.tag-cloud-list.is-center a:nth-child(4) {
+	background:-webkit-linear-gradient(left,#ef32d9,#89fffd);
+	background:-moz-linear-gradient(left,#ef32d9,#89fffd);
+	background:-o-linear-gradient(left,#ef32d9,#89fffd);
+	background:-ms-linear-gradient(left,#ef32d9,#89fffd);
+	background:linear-gradient(to right,#ef32d9,#89fffd)
+}
+.tag-cloud-list.is-center a:nth-child(5) {
+	background:-webkit-linear-gradient(left,#c0c0aa,#1cefff);
+	background:-moz-linear-gradient(left,#c0c0aa,#1cefff);
+	background:-o-linear-gradient(left,#c0c0aa,#1cefff);
+	background:-ms-linear-gradient(left,#c0c0aa,#1cefff);
+	background:linear-gradient(to right,#c0c0aa,#1cefff)
+}
+.tag-cloud-list.is-center a:nth-child(6) {
+	background:-webkit-linear-gradient(left,#ff5f6d,#ffc371);
+	background:-moz-linear-gradient(left,#ff5f6d,#ffc371);
+	background:-o-linear-gradient(left,#ff5f6d,#ffc371);
+	background:-ms-linear-gradient(left,#ff5f6d,#ffc371);
+	background:linear-gradient(to right,#ff5f6d,#ffc371)
+}
+.tag-cloud-list.is-center a:nth-child(7) {
+	background:#9796f0;
+	background:-webkit--webkit-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-webkit--moz-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-webkit--o-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-webkit--ms-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-webkit-linear-gradient(to right,#9796f0,#fbc7d4);
+	background:-webkit-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-moz-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-o-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-ms-linear-gradient(left,#9796f0,#fbc7d4);
+	background:linear-gradient(to right,#9796f0,#fbc7d4)
+}
+.tag-cloud-list.is-center a:nth-child(8) {
+	background:#77a1d3;
+	background:-webkit--webkit-linear-gradient(left,#81baff,#79cbca,#e684ae);
+	background:-webkit--moz-linear-gradient(left,#81baff,#79cbca,#e684ae);
+	background:-webkit--o-linear-gradient(left,#81baff,#79cbca,#e684ae);
+	background:-webkit--ms-linear-gradient(left,#81baff,#79cbca,#e684ae);
+	background:-webkit-linear-gradient(to right,#81baff,#79cbca,#e684ae);
+	background:-webkit-linear-gradient(left,#81baff,#79cbca);
+	background:-moz-linear-gradient(left,#81baff,#79cbca);
+	background:-o-linear-gradient(left,#81baff,#79cbca);
+	background:-ms-linear-gradient(left,#81baff,#79cbca);
+	background:linear-gradient(to right,#81baff,#79cbca)
+}
+.tag-cloud-list a:nth-child(9) {
+	background:-webkit-linear-gradient(left,#fbd786,#f7797d);
+	background:-moz-linear-gradient(left,#fbd786,#f7797d);
+	background:-o-linear-gradient(left,#fbd786,#f7797d);
+	background:-ms-linear-gradient(left,#fbd786,#f7797d);
+	background:linear-gradient(to right,#fbd786,#f7797d)
+}
+.tag-cloud-list.is-center a:nth-child(10) {
+	background:-webkit-linear-gradient(left,#00b09b,#96c93d);
+	background:-moz-linear-gradient(left,#00b09b,#96c93d);
+	background:-o-linear-gradient(left,#00b09b,#96c93d);
+	background:-ms-linear-gradient(left,#00b09b,#96c93d);
+	background:linear-gradient(to right,#00b09b,#96c93d)
+}
+.tag-cloud-list.is-center a:nth-child(11) {
+	background:-webkit-linear-gradient(left,#ff6e7f,#bfe9ff);
+	background:-moz-linear-gradient(left,#ff6e7f,#bfe9ff);
+	background:-o-linear-gradient(left,#ff6e7f,#bfe9ff);
+	background:-ms-linear-gradient(left,#ff6e7f,#bfe9ff);
+	background:linear-gradient(to right,#ff6e7f,#bfe9ff)
+}
+.tag-cloud-list.is-center a:nth-child(12) {
+	background:-webkit-linear-gradient(left,#ef32d9,#89fffd);
+	background:-moz-linear-gradient(left,#ef32d9,#89fffd);
+	background:-o-linear-gradient(left,#ef32d9,#89fffd);
+	background:-ms-linear-gradient(left,#ef32d9,#89fffd);
+	background:linear-gradient(to right,#ef32d9,#89fffd)
+}
+.tag-cloud-list.is-center a:nth-child(13) {
+	background:-webkit-linear-gradient(left,#c0c0aa,#1cefff);
+	background:-moz-linear-gradient(left,#c0c0aa,#1cefff);
+	background:-o-linear-gradient(left,#c0c0aa,#1cefff);
+	background:-ms-linear-gradient(left,#c0c0aa,#1cefff);
+	background:linear-gradient(to right,#c0c0aa,#1cefff)
+}
+.tag-cloud-list.is-center a:nth-child(6) {
+	background:-webkit-linear-gradient(left,#ff5f6d,#ffc371);
+	background:-moz-linear-gradient(left,#ff5f6d,#ffc371);
+	background:-o-linear-gradient(left,#ff5f6d,#ffc371);
+	background:-ms-linear-gradient(left,#ff5f6d,#ffc371);
+	background:linear-gradient(to right,#ff5f6d,#ffc371)
+}
+.tag-cloud-list.is-center a:nth-child(14) {
+	background:#9796f0;
+	background:-webkit--webkit-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-webkit--moz-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-webkit--o-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-webkit--ms-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-webkit-linear-gradient(to right,#9796f0,#fbc7d4);
+	background:-webkit-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-moz-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-o-linear-gradient(left,#9796f0,#fbc7d4);
+	background:-ms-linear-gradient(left,#9796f0,#fbc7d4);
+	background:linear-gradient(to right,#9796f0,#fbc7d4)
+}
+.tag-cloud-list.is-center a:nth-child(15) {
+	background:#77a1d3;
+	background:-webkit--webkit-linear-gradient(left,#81baff,#79cbca,#e684ae);
+	background:-webkit--moz-linear-gradient(left,#81baff,#79cbca,#e684ae);
+	background:-webkit--o-linear-gradient(left,#81baff,#79cbca,#e684ae);
+	background:-webkit--ms-linear-gradient(left,#81baff,#79cbca,#e684ae);
+	background:-webkit-linear-gradient(to right,#81baff,#79cbca,#e684ae);
+	background:-webkit-linear-gradient(left,#81baff,#79cbca);
+	background:-moz-linear-gradient(left,#81baff,#79cbca);
+	background:-o-linear-gradient(left,#81baff,#79cbca);
+	background:-ms-linear-gradient(left,#81baff,#79cbca);
+	background:linear-gradient(to right,#81baff,#79cbca)
+}        
+.tag-cloud-list.is-center a:nth-child(16) {
+	background:-webkit-linear-gradient(left,#fbd786,#f7797d);
+	background:-moz-linear-gradient(left,#fbd786,#f7797d);
+	background:-o-linear-gradient(left,#fbd786,#f7797d);
+	background:-ms-linear-gradient(left,#fbd786,#f7797d);
+	background:linear-gradient(to right,#fbd786,#f7797d)
+}
+.tag-cloud-list.is-center a:nth-child(17) {
+	background:-webkit-linear-gradient(left,#fbd786,#f7797d);
+	background:-moz-linear-gradient(left,#fbd786,#f7797d);
+	background:-o-linear-gradient(left,#fbd786,#f7797d);
+	background:-ms-linear-gradient(left,#fbd786,#f7797d);
+	background:linear-gradient(to right,#fbd786,#f7797d)
+}
+.tag-cloud-list.is-center a:nth-child(18) {
+	background:-webkit-linear-gradient(left,#00b09b,#96c93d);
+	background:-moz-linear-gradient(left,#00b09b,#96c93d);
+	background:-o-linear-gradient(left,#00b09b,#96c93d);
+	background:-ms-linear-gradient(left,#00b09b,#96c93d);
+	background:linear-gradient(to right,#00b09b,#96c93d)
+}
+.tag-cloud-list.is-center a:nth-child(19) {
+	background:-webkit-linear-gradient(left,#ff6e7f,#bfe9ff);
+	background:-moz-linear-gradient(left,#ff6e7f,#bfe9ff);
+	background:-o-linear-gradient(left,#ff6e7f,#bfe9ff);
+	background:-ms-linear-gradient(left,#ff6e7f,#bfe9ff);
+	background:linear-gradient(to right,#ff6e7f,#bfe9ff)
+}
+.tag-cloud-list.is-center a:nth-child(20) {
+	background:-webkit-linear-gradient(left,#ef32d9,#89fffd);
+	background:-moz-linear-gradient(left,#ef32d9,#89fffd);
+	background:-o-linear-gradient(left,#ef32d9,#89fffd);
+	background:-ms-linear-gradient(left,#ef32d9,#89fffd);
+	background:linear-gradient(to right,#ef32d9,#89fffd)
+}
+.tag-cloud-list.is-center a:nth-child(21) {
+	background:-webkit-linear-gradient(left,#c0c0aa,#1cefff);
+	background:-moz-linear-gradient(left,#c0c0aa,#1cefff);
+	background:-o-linear-gradient(left,#c0c0aa,#1cefff);
+	background:-ms-linear-gradient(left,#c0c0aa,#1cefff);
+	background:linear-gradient(to right,#c0c0aa,#1cefff)
+}       
+.tag-cloud-list a {
+    display: inline-block;
+    padding: 0 8px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    transition: all 0.3s;
+    /* cursor: pointer; */
+    /* width: calc(100% / 3 - 8px); */
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    /* border: var(--leonus-border); */
+    /* display: -webkit-box; */
+    display: -moz-box;
+    /* display: -webkit-flex; */
+    display: -ms-flexbox;
+    display: box;
+    /* display: flex; */
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -o-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -o-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border-radius: 104px;
+    color: aliceblue !important;	
+}
+.tag-cloud-list.is-center {
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    gap: 12px;
+    padding: 0;
+    -webkit-box-lines: multiple;
+    -moz-box-lines: multiple;
+    -o-box-lines: multiple;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
