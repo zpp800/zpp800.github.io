@@ -19,15 +19,6 @@
     border-radius: 4px;
   }
 
-  /* 欢迎信息 */
-#welcome-info {
-  background: linear-gradient(45deg, #b9f4f3, #e3fbf9);
-  border-radius: 18px;
-  padding: 8px;
-}
-[data-theme="dark"] #welcome-info {
-  background: #212121;
-}
 
 /* twikoo评论美化 */
 /* 自定义twikoo评论输入框高度 */
